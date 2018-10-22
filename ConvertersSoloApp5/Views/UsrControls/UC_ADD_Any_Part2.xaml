@@ -1,0 +1,57 @@
+﻿<UserControl
+    x:Class="ConvertersSoloApp5.Views.UsrControls.UC_ADD_Any_Part2"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ConvertersSoloApp5.Views.UsrControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Height="640" Width="360"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Height="640" Width="360" Background="Black">
+        <StackPanel Margin="0 50 0 10" Height="550" Width="355"
+                    ScrollViewer.VerticalScrollBarVisibility="Visible"
+                    ScrollViewer.IsVerticalRailEnabled="True">
+            <Grid Background="White" Width="340">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image x:Name="imgAllThreeMedTypes"              
+                   Tapped="ImgAllThreeMedTypes_TappedAsync"                 
+                   Source="/Assets/Images/All-Three-01.png"               
+                   Height="150" Width="150"
+                   Margin="0 15 0 10"/>
+                <StackPanel Grid.Column="1">
+                    <TextBox x:Name="boxContentPlayTime"
+                 Header="Play Time:" />
+                    <TextBox x:Name="boxContentName"
+                 Header="Content Name:"/>
+                    <TextBox x:Name="boxContentFileName"
+                 Header="Content File Name:"/>
+                </StackPanel>
+            </Grid>
+            <TextBox x:Name="boxNotes" Background="White"
+                 Header="Notes:" Width="350"/>
+            <AppBarButton Icon="Add" HorizontalAlignment="Right"
+                      Click="AppBarButton_Click"
+                          Margin="0 5" Foreground="Ivory"/>
+            <ListView x:Name="listM_Content"
+                  SelectionChanged="listM_Content_SelectionChanged"/>
+        </StackPanel>
+        <StackPanel x:Name="stackPreview"
+                    Margin="5,350,5,0" VerticalAlignment="Top"
+                    Height="200"
+                    Background="White"
+                    Visibility="Visible" HorizontalAlignment="Stretch">
+            <CaptureElement 
+                    x:Name="previewElement"
+                    Height="150"/>
+            <AppBarButton Icon="Camera" Background="White"
+                    Content="take picture"
+                    Height="48" Width="60"
+                    Click="AppBarButton_Click_1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

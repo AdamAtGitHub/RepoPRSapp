@@ -1,0 +1,55 @@
+﻿<UserControl
+    x:Class="Views.UsrControls.UC_AddContentList"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ConvertersSoloApp5.Views.UsrControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    
+    xmlns:testApp="clr-namespace:TestApp"   
+    DataContext="{Binding RelativeSource=
+    {RelativeSource Self}}"  
+    
+    xmlns:m="using:Models" 
+    Height="640" Width="360"
+    mc:Ignorable="d"
+    d:DesignHeight="640"
+    d:DesignWidth="360"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <!--d:DesignWidth="360" for Designer(WYSIWIG)
+                Width="360" for RunTime-->
+    <UserControl.Resources>
+        <m:ContentLists x:Key="ContentLists"/>
+    </UserControl.Resources>
+
+    <StackPanel Background="White" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <StackPanel VerticalAlignment="Center"
+                    HorizontalAlignment="Center" 
+                    Width="286" Height="285">
+            <TextBox Text="Add Play Item" Foreground="Orange" 
+                     Width="Auto" FontSize="26" Background="Gray"
+                     HorizontalAlignment="Center" Margin="0 3 0 8"/>
+            <Button Name="btnAdd" Click="btnAdd_Click" Margin="5 5" Background="Gray"
+                    Foreground="Ivory">Add</Button>
+            <Button Name="btnRemove" Click="btnRemove_Click" Margin="5 5" Background="Gray"
+                    Foreground="Ivory">Remove</Button>
+            <ListBox Name="myListBox" Height="140" Width="276"  Background="LightGray"
+                     SelectionMode="Multiple" Margin="5 5"
+                     ItemsSource="{Binding MyCollection}"/>
+        </StackPanel>
+        <StackPanel Width="286" VerticalAlignment="Center"
+                    HorizontalAlignment="Center" Margin="5 10">
+            <TextBlock HorizontalAlignment="Center"
+                    Text="Model-Class" Foreground="Gray" Margin="2 2"/>
+            <Button Name="btnClassAdd" Click="btnClassAdd_Click" Margin="5 5" Background="Gray"
+                    Foreground="Ivory">Add</Button>
+            <Button Name="btnClassRemove" Click="btnClassRemove_Click" Margin="5 5"  Background="Gray"
+                    Foreground="Ivory">Remove</Button>
+            <ListBox Name="myClassListBox" Background="LightGray"                    
+                     ItemsSource="{Binding ContentCollection}"
+                     SelectionMode="Multiple" 
+                     Height="160"
+                     Margin="5,0,8,0"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>
