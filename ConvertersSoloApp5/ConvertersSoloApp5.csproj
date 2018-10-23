@@ -166,7 +166,7 @@
     <Content Include="Assets\AV\PlayLibray\Audio\Thunder.m4a" />
     <Content Include="Assets\AV\PlayLibray\Audio\Thunderstruck.mp3" />
     <Content Include="Assets\AV\PlayLibray\Audio\TookAPillinIbiza.mp3" />
-    <Content Include="Assets\AV\PlayLibray\PlayLists\Mood\Back In High Life.mp3" />
+    <Content Include="Assets\AV\PlayLibray\PlayLists\Mood\BackInHighLife.mp3" />
     <Content Include="Assets\AV\PlayLibray\PlayLists\Mood\FightSong.mp3" />
     <Content Include="Assets\AV\PlayLibray\PlayLists\Mood\HoneyImGood.mp3" />
     <Content Include="Assets\AV\PlayLibray\PlayLists\Mood\Mother.mp3" />
@@ -230,6 +230,7 @@
     <Content Include="Speech\SSML\Routine\9100_FloorPlanRoutine.xml" />
     <Content Include="Speech\SSML\Routine\en-ES\2ndPersonPlural\00_MMM.xml" />
     <Content Include="Speech\SSML\Routine\en-ES\2ndPersonSingular\00_MMM.xml" />
+    <Content Include="Speech\SSML\Routine\en-ES\2ndPersonSingular\PlaySet_0000\01-01- IT_AsyncCaveat.xml" />
     <Content Include="Speech\SSML\Routine\en-ES\2ndPersonSingular\PlaySet_0000\04_Workout.xml" />
     <Content Include="Speech\SSML\Routine\en-ES\2ndPersonSingular\PlaySet_0000\03_Run.xml" />
     <Content Include="Speech\SSML\Routine\en-ES\2ndPersonSingular\PlaySet_0000\05_ProgPlan1st.xml" />

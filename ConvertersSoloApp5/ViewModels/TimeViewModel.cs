@@ -131,6 +131,18 @@ namespace ViewModels
         }
         #endregion
 
+        #region Properties for File(s) Folders picked, Paths, URI 
+        private string fileNamePicked;
+        public string FileNamePicked
+        {
+            get => fileNamePicked;
+            set
+            {
+                fileNamePicked = value;
+                RaisePropertyChanged("FileNamePicked");
+            }
+        }
+        #endregion
         //00
         #region  public class RelayCommand : ICommand
         //Create Relay Command that inherits ICommand Interface
@@ -149,14 +161,13 @@ namespace ViewModels
                 return speakAsync00_MMMCommand;
             }
         }
-
         public async void SpeakAsync00_MMM()
         {
             try
             {
                 if (speechModel.IsCmdMode != true)
                 {
-                    path = "ms-appx:///Speech/SSML/Routine/en-ES/2ndPersonSingular/PlaySet_0000/01_Alarm.xml";
+                    path = "ms-appx:///Speech/SSML/Routine/en-ES/2ndPersonSingular/PlaySet_0000/" + fileNamePicked;
                     StorageFile ssmlFile = await StorageFile.GetFileFromApplicationUriAsync(
                     new Uri(path));
                     await this.SpeakSsmlFileAsync(
@@ -175,7 +186,7 @@ namespace ViewModels
         public bool CanSpeakAsync00_MMMCommand
         {
             get { return true; }
-        }
+        }      
         #endregion
         //10
         #region  public class RelayCommand : ICommand

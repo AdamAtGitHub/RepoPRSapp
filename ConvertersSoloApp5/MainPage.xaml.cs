@@ -5,7 +5,7 @@ using Windows.Storage.Pickers;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-
+using ViewModels;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace ConvertersSoloApp5
@@ -20,10 +20,12 @@ namespace ConvertersSoloApp5
         const string ENV_CENTRAL_PATH = @"C:\Users\Flazz\Music\AV\PlayLibray\Audio\";
         #endregion
 
+        //public TimeViewModel TimeViewModel { get; set; }
+
         public MainPage()
         {
             this.InitializeComponent();
-
+            
             PickAFileButton.Click += new RoutedEventHandler(PickAFileButton_Click);
 
             ApplicationView view = ApplicationView.GetForCurrentView();
@@ -40,7 +42,6 @@ namespace ConvertersSoloApp5
 
         #region PickAFileButton's Click event handler
         private async void PickAFileButton_Click(object sender, RoutedEventArgs e)
-        ////private void PickAFileButton_Click(object sender, RoutedEventArgs e)
         {
             // Clear previous returned file name, if it exists, between iterations of this scenario
             tbFilePicked.Text = "";
@@ -62,7 +63,12 @@ namespace ConvertersSoloApp5
             if (file != null)
             {
                 // Application now has read/write access to the picked file
+             
                 tbFilePicked.Text = file.Name;
+                TimeViewModel tvm = new TimeViewModel
+                {
+                    FileNamePicked = tbFilePicked.Text
+                };
                 Debug.WriteLine(ENV_CENTRAL_PATH + tbFilePicked.Text);
             }
             else
