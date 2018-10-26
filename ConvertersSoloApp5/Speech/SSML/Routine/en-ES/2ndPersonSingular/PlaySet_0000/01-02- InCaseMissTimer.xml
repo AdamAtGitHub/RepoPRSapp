@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<speak version="1.0"
+ xmlns="http://www.w3.org/2001/10/synthesis"
+ xml:lang="en-ES">
+
+  <prosody rate="medium">
+    <p>
+      <s>Debugging</s>
+      <voice gender="female">
+        <s>Default play file in case I miss Timer</s>
+      </voice>
+    </p>  
+    <p>
+      <s>While I'm at it.</s>
+      <s>the lower case private property name, </s>
+      <s>Which is the class property in a full property snippet?</s>
+      <break time="3s"/>
+      <s>The upper or lower case or lower case declaration?</s>
+      <s>Which is the class field?</s>
+      <break time="2s"/>
+      <s>My new-monic device is what?</s>
+      <break time="4s"/>
+      <s>yes,<break/>because private comes first in full prop declarations, it is: </s>
+      <break/>
+      <s>Like and baseball player fielding the ball, </s>
+      <s>the ball must be someone's property. </s>
+      <break/>
+      <s>Right?</s>
+    </p>
+
+    Take a deep breath <break/>
+    then continue.
+    Press 1 or wait for the tone. <break time="3s"/>
+    I didn't hear you! <break strength="weak"/> Please repeat.
+    
+    
+  </prosody>
+</speak>

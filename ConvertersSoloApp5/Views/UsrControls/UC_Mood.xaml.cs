@@ -131,14 +131,23 @@ namespace Views.UsrControls
                 CountDown2 = 0;
                 try
                 {
-                    MediaTool.Source = new Uri(ENV_PROJ_PATH + tb2FilePicked.Text);
+                    MediaTool.Source = new Uri("C:\\Users\\Flazz\\Music\\AV\\PlayLibray\\PlayLists\\Out\\Jessie.mp3");
+                   // MediaTool.Source = new Uri(ENV_PROJ_PATH + tb2FilePicked.Text);
                 }
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex.Message.ToString());
                 }
                 MediaTool.Volume = 100;
-                MediaTool.Play();
+                try
+                {
+                    MediaTool.Play();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message.ToString());
+                }
+               
                 timer2.Stop();
             }
         }

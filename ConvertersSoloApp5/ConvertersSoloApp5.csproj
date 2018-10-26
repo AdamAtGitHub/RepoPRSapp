@@ -171,6 +171,7 @@
     <Content Include="Assets\AV\PlayLibray\PlayLists\Mood\HoneyImGood.mp3" />
     <Content Include="Assets\AV\PlayLibray\PlayLists\Mood\Mother.mp3" />
     <Content Include="Assets\AV\PlayLibray\PlayLists\Mood\Relax_SusanDavis.mp3" />
+    <Content Include="Assets\AV\PlayLibray\PlayLists\Mood\Thunderstruck.mp3" />
     <Content Include="Assets\AV\PlayLibray\PlayLists\Mood\TookAPillinIbiza.mp3" />
     <Content Include="Assets\AV\PlayLibray\PlayLists\Out\FightSong.mp3" />
     <Content Include="Assets\AV\PlayLibray\PlayLists\Out\HoneyImGood.mp3" />
@@ -178,6 +179,7 @@
     <Content Include="Assets\AV\PlayLibray\PlayLists\Out\Jessie.mp3" />
     <Content Include="Assets\AV\PlayLibray\PlayLists\Out\Mother.mp3" />
     <Content Include="Assets\AV\PlayLibray\PlayLists\Out\Thunder.m4a" />
+    <Content Include="Assets\AV\PlayLibray\PlayLists\Out\Thunderstruck.mp3" />
     <Content Include="Assets\AV\PlayLibray\PlayLists\Out\TookAPillinIbiza.mp3" />
     <Content Include="Assets\AV\PlayLibray\PlayLists\WorkOut\BackInHighLife.mp3" />
     <Content Include="Assets\AV\PlayLibray\PlayLists\WorkOut\FightSong.mp3" />
@@ -186,6 +188,7 @@
     <Content Include="Assets\AV\PlayLibray\PlayLists\WorkOut\Issues.mp3" />
     <Content Include="Assets\AV\PlayLibray\PlayLists\WorkOut\Mother.mp3" />
     <Content Include="Assets\AV\PlayLibray\PlayLists\WorkOut\Thunder.m4a" />
+    <Content Include="Assets\AV\PlayLibray\PlayLists\WorkOut\Thunderstruck.mp3" />
     <Content Include="Assets\AV\PlayLibray\PlayLists\WorkOut\TookAPillinIbiza.mp3" />
     <Content Include="Assets\AV\PlayLibray\Videos\FullMetJack_30s.WMV" />
     <Content Include="Assets\Images\AdamPassProfile-01.png" />
@@ -230,6 +233,7 @@
     <Content Include="Speech\SSML\Routine\9100_FloorPlanRoutine.xml" />
     <Content Include="Speech\SSML\Routine\en-ES\2ndPersonPlural\00_MMM.xml" />
     <Content Include="Speech\SSML\Routine\en-ES\2ndPersonSingular\00_MMM.xml" />
+    <Content Include="Speech\SSML\Routine\en-ES\2ndPersonSingular\PlaySet_0000\01-02- InCaseMissTimer.xml" />
     <Content Include="Speech\SSML\Routine\en-ES\2ndPersonSingular\PlaySet_0000\01-01- IT_AsyncCaveat.xml" />
     <Content Include="Speech\SSML\Routine\en-ES\2ndPersonSingular\PlaySet_0000\04_Workout.xml" />
     <Content Include="Speech\SSML\Routine\en-ES\2ndPersonSingular\PlaySet_0000\03_Run.xml" />
@@ -366,6 +370,45 @@
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ConsoleApp1_Only|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\ConsoleApp1_Only\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ConsoleApp1_Only|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\ConsoleApp1_Only\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ConsoleApp1_Only|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\ConsoleApp1_Only\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

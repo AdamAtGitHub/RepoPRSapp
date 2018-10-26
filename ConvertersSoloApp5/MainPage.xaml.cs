@@ -6,6 +6,7 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using ViewModels;
+using System.Reflection;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace ConvertersSoloApp5
@@ -20,14 +21,13 @@ namespace ConvertersSoloApp5
         const string ENV_CENTRAL_PATH = @"C:\Users\Flazz\Music\AV\PlayLibray\Audio\";
         #endregion
 
-        //public TimeViewModel TimeViewModel { get; set; }
 
         public MainPage()
         {
             this.InitializeComponent();
-            
-            PickAFileButton.Click += new RoutedEventHandler(PickAFileButton_Click);
 
+            PickAFileButton00.Click += new RoutedEventHandler(PickAFileButton_Click);
+            PickAFileButton10.Click += new RoutedEventHandler(PickAFileButton_Click);
             ApplicationView view = ApplicationView.GetForCurrentView();
             bool IsInFullScreenMode = view.IsFullScreenMode;
             if (IsInFullScreenMode)
@@ -43,8 +43,20 @@ namespace ConvertersSoloApp5
         #region PickAFileButton's Click event handler
         private async void PickAFileButton_Click(object sender, RoutedEventArgs e)
         {
-            // Clear previous returned file name, if it exists, between iterations of this scenario
-            tbFilePicked.Text = "";
+            //BUG - with break point here, you can see somehow filepicker is raising
+            //prop change for somedatetime
+           
+            #region Gets name prop of sender
+            string name = Convert.ToString(e.OriginalSource.GetType().GetProperty("Name").GetValue(e.OriginalSource, null));
+            // MessageBox.Show(name);
+            if (name == "PickAFileButton00")
+                // whatever is the code
+                if (name == "PickAFileButton10")
+                    // whatever is the code
+                    #endregion
+
+                    // Clear previous returned file name, if it exists, between iterations of this scenario
+                    tbFilePicked.Text = "";
 
             FileOpenPicker openPicker = new FileOpenPicker();
             openPicker.ViewMode = PickerViewMode.Thumbnail;
@@ -59,17 +71,16 @@ namespace ConvertersSoloApp5
             openPicker.FileTypeFilter.Add(".xml");
 
             StorageFile file = await openPicker.PickSingleFileAsync();
-            //StorageFile file = await openPicker.p
             if (file != null)
             {
                 // Application now has read/write access to the picked file
-             
+
                 tbFilePicked.Text = file.Name;
                 TimeViewModel tvm = new TimeViewModel
                 {
-                    FileNamePicked = tbFilePicked.Text
+                    PickedFileName = tbFilePicked.Text
                 };
-                Debug.WriteLine(ENV_CENTRAL_PATH + tbFilePicked.Text);
+                Debug.WriteLine("tvm.Full_Uri: \t{0}", tvm.Full_Uri);
             }
             else
             {

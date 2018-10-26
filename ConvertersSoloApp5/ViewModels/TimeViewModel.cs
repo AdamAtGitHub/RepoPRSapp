@@ -51,97 +51,145 @@ namespace ViewModels
             {
                 Debug.WriteLine("Exception: {0}", e.Message.ToString());
             }
-            Debug.WriteLine("got past mediaElement.Play()");
+            // Debug.WriteLine("got past mediaElement.Play()");
         }
         #endregion
 
-        #region Path & FileName Full Properties
+        #region Full Properties- Path, PickedFileName, and Uri
+        //private string testpath;
+        //public string TestPath
+        //{
+        //    get => testpath;
+        //    set
+        //    {
+        //        testpath = value;
+        //        RaisePropertyChanged("TestPath");
+
+        //    }
+        //}
+
         private string path;
         public string Path
         {
-            get { return path; }
+            get => path;
             set
             {
                 path = value;
                 RaisePropertyChanged("Path");
+                RaisePropertyChanged("Full_Uri");
             }
         }
 
-        private string fileName;
-        public string FileName
+        private string pickedFileName;
+        public string PickedFileName
         {
-            get { return fileName; }
+            get => pickedFileName;
             set
             {
-                fileName = value;
-                RaisePropertyChanged("FileName");
+                pickedFileName = value;
+                RaisePropertyChanged("PickedFileName");
+                RaisePropertyChanged("Full_Uri");
             }
         }
+
+        private string full_Uri;
+        public string Full_Uri
+        {
+            get => Path + PickedFileName;
+            set
+            {
+                full_Uri = value;
+                RaisePropertyChanged("Full_Uri");
+            }
+        }
+        #endregion
+        #region Path & FileName Full Properties
+        //private string path;
+        //public string Path
+        //{
+        //    get { return path; }
+        //    set
+        //    {
+        //        path = value;
+        //        RaisePropertyChanged("Path");
+        //    }
+        //}
+
+        //private string fileName;
+        //public string FileName
+        //{
+        //    get { return fileName; }
+        //    set
+        //    {
+        //        fileName = value;
+        //        RaisePropertyChanged("FileName");
+        //    }
+        //}
         #endregion
 
         #region Misc .xml file Paths
         //path = "ms-appx:///Speech/SSML/UsageSyntax.xml";
         #endregion
 
-        #region SpeakAsyncCommand
-        RelayCommand speakAsyncCommand;
-        public ICommand SpeakAsyncCommand
-        {
-            get
-            {
-                if (speakAsyncCommand == null)
-                {
-                    speakAsyncCommand = new RelayCommand(
-                    param => SpeakAsync(),
-                    param => CanSpeakAsync
-                    );
-                };
-                return speakAsyncCommand;
-            }
-        }
-        public async void SpeakAsync()
-        {
-            //SpeakAsync Logic goes here
-            Debug.WriteLine("from SpeakAsync()");
-            try
-            {
-                if (speechModel.IsCmdMode != true)
-                {
-                    Debug.WriteLine("Model synthAsync.IsCmdMode  == true <-- Worked");
-                    path = "ms-appx:///Speech/SSML/SED/en-ES/2ndPersonSingular/" + fileName;
-                    Debug.WriteLine("property path value: {0}", path);
-                    StorageFile ssmlFile = await StorageFile.GetFileFromApplicationUriAsync(
-                    new Uri(path));
-                    await this.SpeakSsmlFileAsync(
-                    ssmlFile, this.uiMediaElement);
-                }
-                else
-                {
-                    Debug.WriteLine("Model synthAsync.IsCmdMode went to else");
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Exception: {0}", ex.Message.ToString());
-            }
-        }
-        public bool CanSpeakAsync
-        {
-            get { return true; }
-        }
+        #region SpeakAsyncCommand - Commented Out for now
+        //RelayCommand speakAsyncCommand;
+        //public ICommand SpeakAsyncCommand
+        //{
+        //    get
+        //    {
+        //        if (speakAsyncCommand == null)
+        //        {
+        //            speakAsyncCommand = new RelayCommand(
+        //            param => SpeakAsync(),
+        //            param => CanSpeakAsync
+        //            );
+        //        };
+        //        return speakAsyncCommand;
+        //    }
+        //}
+        //public async void SpeakAsync()
+        //{
+        //    //SpeakAsync Logic goes here
+        //    Debug.WriteLine("from SpeakAsync()");
+        //    try
+        //    {
+        //        if (speechModel.IsCmdMode != true)
+        //        {
+        //            Debug.WriteLine("Model synthAsync.IsCmdMode  == true <-- Worked");
+        //            path = "ms-appx:///Speech/SSML/SED/en-ES/2ndPersonSingular/" + PickedFileName;
+        //            Debug.WriteLine("property path value: {0}", path);
+        //            StorageFile ssmlFile = await StorageFile.GetFileFromApplicationUriAsync(
+        //            new Uri(path));
+        //            await this.SpeakSsmlFileAsync(
+        //            ssmlFile, this.uiMediaElement);
+        //        }
+        //        else
+        //        {
+        //            Debug.WriteLine("Model synthAsync.IsCmdMode went to else");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine("Exception: {0}", ex.Message.ToString());
+        //    }
+        //}
+        //public bool CanSpeakAsync
+        //{
+        //    get { return true; }
+        //}
         #endregion
 
         #region Properties for File(s) Folders picked, Paths, URI 
-        private string fileNamePicked;
-        public string FileNamePicked
-        {
-            get => fileNamePicked;
-            set
-            {
-                fileNamePicked = value;
-                RaisePropertyChanged("FileNamePicked");
-            }
-        }
+        //private string fileNamePicked;
+        //public string FileNamePicked
+        //{
+        //    get => fileNamePicked;
+        //    set
+        //    {
+        //        fileNamePicked = value;
+        //        RaisePropertyChanged("FileNamePicked");
+        //    }
+        //}
         #endregion
         //00
         #region  public class RelayCommand : ICommand
@@ -167,11 +215,14 @@ namespace ViewModels
             {
                 if (speechModel.IsCmdMode != true)
                 {
-                    path = "ms-appx:///Speech/SSML/Routine/en-ES/2ndPersonSingular/PlaySet_0000/" + fileNamePicked;
+                    path = "ms-appx:///Speech/SSML/Routine/en-ES/2ndPersonSingular/PlaySet_0000/" + PickedFileName;
                     StorageFile ssmlFile = await StorageFile.GetFileFromApplicationUriAsync(
                     new Uri(path));
                     await this.SpeakSsmlFileAsync(
                     ssmlFile, this.uiMediaElement);
+                    //testpath= path;
+                    Debug.WriteLine("SpeakAsync00's path prop value:");
+                    Debug.WriteLine(path);
                 }
                 else
                 {
@@ -182,11 +233,32 @@ namespace ViewModels
             {
                 Debug.WriteLine("Exception: {0}", ex.Message.ToString());
             }
+            finally//Incase don't choose file in time
+            {
+                if (PickedFileName == null)
+                {
+                    pickedFileName = "01 - 02 - InCaseMissTimer.xml";
+                    PickedFileName = "05_ProgPlan1st.xml";
+
+                    path = "ms-appx:///Speech/SSML/Routine/en-ES/2ndPersonSingular/PlaySet_0000/" + PickedFileName;
+                    //01 - 02 - InCaseMissTimer.xml;
+                    StorageFile ssmlFile = await StorageFile.GetFileFromApplicationUriAsync(
+                    new Uri(path));
+                    await this.SpeakSsmlFileAsync(
+                    ssmlFile, this.uiMediaElement);
+                    // testpath = path;
+                    Debug.WriteLine("SpeakAsync00's Public Path prop value:");
+                    Debug.WriteLine(Path);
+                    Debug.WriteLine("SpeakAsync00's Public Full_Uri prop value:");
+                    Debug.WriteLine(Full_Uri);
+                }
+            }
+
         }
         public bool CanSpeakAsync00_MMMCommand
         {
             get { return true; }
-        }      
+        }
         #endregion
         //10
         #region  public class RelayCommand : ICommand
@@ -445,10 +517,10 @@ namespace ViewModels
 
         private const int INTERVAL_IN_SECONDS = 1;
         public DateTimeOffset dto;
-        private string s;  
+        private string s;
         public string TimeFromStart
         {
-           get => s;
+            get => s;
         }
 
         #region VM properties
@@ -616,7 +688,8 @@ namespace ViewModels
             RaisePropertyChanged("TimeFromStart");
             RaisePropertyChanged("CurrentTime");
 
-            #region Find Match works when clock in double digits
+            #region Find & Play Scheduled Times vs Current Time
+            #region Find isMatch - GetAdjustedTime
             string GetAdjustedTime(string _sOut)
             {
                 string sOut;
@@ -647,6 +720,7 @@ namespace ViewModels
                     string holding = sOut.Remove(len, 3);// --> "9:27:"
                     sOut = holding + "00 " + endChars;// --> "9:27:00 PM"             
                 }
+                Debug.WriteLine(sOut);
                 return sOut;
             }
 
@@ -691,314 +765,35 @@ namespace ViewModels
 
             sTimePickerTime_1 = SomeDateTimeTimeSpanProxy_1.ToString("T");
             sOut_1 = tfnC_1.TimeStringFormatter(sTimePickerTime_1);
-            #region old approach
-            //int startPos_1 = 5;
-            //string sub_1 = sOut_1.Substring(0, 2);         
-            //if (!sub_1.Contains(":"))
-            //{
-            //    startPos_1 = 6;
-            //}
-            //sub_1 = sOut_1.Substring(startPos_1, 2);
-            //if (sub_1 != "00" || sOut_1.Contains("0000 "))
-            //{        
-            //    if (!sOut_1.Contains("0000 "))
-            //    {
-            //        sOut_1 = sOut_1.Remove(startPos_1, 10);
-            //    }
-            //    else
-            //    {
-            //        sOut_1 = sOut_1.Remove(startPos_1, 4);
-            //    }
-            //    string endChars_1;
-            //    int len_1 = sOut_1.Length - 2;
-            //    endChars_1 = sOut_1.Substring(len_1, 2);
-            //    len_1 = sOut_1.Length - 3;
-            //    string holding_1 = sOut_1.Remove(len_1, 3);
-            //    sOut_1 = holding_1 + "00 " + endChars_1;
-            //}
-            #endregion
             sOutTemp = sOut_1;
             sOut_1 = GetAdjustedTime(sOutTemp);
             isMatch_1 = tfnC_1.TimesMatched(sOut_1, CurrentTime);
 
             sTimePickerTime_2 = SomeDateTimeTimeSpanProxy_2.ToString("T");
             sOut_2 = tfnC_2.TimeStringFormatter(sTimePickerTime_2);
-            #region old approach
-            //int startPos_2 = 5;
-            //string sub_2 = sOut_2.Substring(0, 2);
-            //if (!sub_2.Contains(":"))
-            //{
-            //    startPos_2 = 6;
-            //}
-            //sub_2 = sOut_2.Substring(startPos_2, 2);
-            //if (sub_2 != "00" || sOut_2.Contains("0000 "))
-            //{
-            //    if (!sOut_2.Contains("0000 "))
-            //    {
-            //        sOut_2 = sOut_2.Remove(startPos_2, 10);
-            //    }
-            //    else
-            //    {
-            //        sOut_2 = sOut_2.Remove(startPos_2, 4);
-            //    }
-            //    string endChars_2;
-            //    int len_2 = sOut_2.Length - 2;
-            //    endChars_2 = sOut_2.Substring(len_2, 2);
-            //    len_2 = sOut_2.Length - 3;
-            //    string holding_2 = sOut_2.Remove(len_2, 3);
-            //    sOut_2 = holding_2 + "00 " + endChars_2;
-            //}
-            #endregion
             sOutTemp = sOut_2;
             sOut_2 = GetAdjustedTime(sOutTemp);
             isMatch_2 = tfnC_2.TimesMatched(sOut_2, CurrentTime);
 
             sTimePickerTime_3 = SomeDateTimeTimeSpanProxy_3.ToString("T");
             sOut_3 = tfnC_3.TimeStringFormatter(sTimePickerTime_3);
-            #region old approach
-            //int startPos_3 = 5;
-            //string sub_3 = sOut_3.Substring(0, 2);
-            //if (!sub_3.Contains(":"))
-            //{
-            //    startPos_3 = 6;
-            //}
-            //sub_3 = sOut_3.Substring(startPos_3, 2);
-            //if (sub_3 != "00" || sOut_3.Contains("0000 "))
-            //{
-            //    if (!sOut_3.Contains("0000 "))
-            //    {
-            //        sOut_3 = sOut_3.Remove(startPos_3, 10);
-            //    }
-            //    else
-            //    {
-            //        sOut_3 = sOut_3.Remove(startPos_3, 4);
-            //    }
-            //    string endChars_3;
-            //    int len_3 = sOut_3.Length - 2;
-            //    endChars_3 = sOut_3.Substring(len_3, 2);
-            //    len_3 = sOut_3.Length - 3;
-            //    string holding_3 = sOut_3.Remove(len_3, 3);
-            //    sOut_3 = holding_3 + "00 " + endChars_3;
-            //}
-            #endregion
             sOutTemp = sOut_3;
             sOut_3 = GetAdjustedTime(sOutTemp);
             isMatch_3 = tfnC_3.TimesMatched(sOut_3, CurrentTime);
 
             sTimePickerTime_4 = SomeDateTimeTimeSpanProxy_4.ToString("T");
             sOut_4 = tfnC_4.TimeStringFormatter(sTimePickerTime_4);
-            #region old approach
-            //int startPos_4 = 5;
-            //string sub_4 = sOut_4.Substring(0, 2);
-            //if (!sub_4.Contains(":"))
-            //{
-            //    startPos_4 = 6;
-            //}
-            //sub_4 = sOut_4.Substring(startPos_4, 2);
-            //if (sub_4 != "00" || sOut_4.Contains("0000 "))
-            //{
-            //    if (!sOut_4.Contains("0000 "))
-            //    {
-            //        sOut_4 = sOut_4.Remove(startPos_4, 10);
-            //    }
-            //    else
-            //    {
-            //        sOut_4 = sOut_4.Remove(startPos_4, 4);
-            //    }
-            //    string endChars_4;
-            //    int len_4 = sOut_4.Length - 2;
-            //    endChars_4 = sOut_4.Substring(len_4, 2);
-            //    len_4 = sOut_4.Length - 3;
-            //    string holding_4 = sOut_4.Remove(len_4, 3);
-            //    sOut_4 = holding_4 + "00 " + endChars_4;
-            //}
-            #endregion
             sOutTemp = sOut_4;
             sOut_4 = GetAdjustedTime(sOutTemp);
             isMatch_4 = tfnC_4.TimesMatched(sOut_4, CurrentTime);
 
             sTimePickerTime_5 = SomeDateTimeTimeSpanProxy_5.ToString("T");
             sOut_5 = tfnC_5.TimeStringFormatter(sTimePickerTime_5);
-            #region old approach
-            //int startPos_5 = 5;
-            //string sub_5 = sOut_5.Substring(0, 2);
-            //if (!sub_5.Contains(":"))
-            //{
-            //    startPos_5 = 6;
-            //}
-            //sub_5 = sOut_5.Substring(startPos_5, 2);
-            //if (sub_5 != "00" || sOut_5.Contains("0000 "))
-            //{
-            //    if (!sOut_5.Contains("0000 "))
-            //    {
-            //        sOut_5 = sOut_5.Remove(startPos_5, 10);
-            //    }
-            //    else
-            //    {
-            //        sOut_5 = sOut_5.Remove(startPos_5, 4);
-            //    }
-            //    string endChars_5;
-            //    int len_5 = sOut_5.Length - 2;
-            //    endChars_5 = sOut_5.Substring(len_5, 2);
-            //    len_5 = sOut_5.Length - 3;
-            //    string holding_5 = sOut_5.Remove(len_5, 3);
-            //    sOut_5 = holding_5 + "00 " + endChars_5;
-            //}
-            #endregion
             sOutTemp = sOut_5;
             sOut_5 = GetAdjustedTime(sOutTemp);
             isMatch_5 = tfnC_5.TimesMatched(sOut_5, CurrentTime);
-
-            #region Find Match Find Match works Single digits     
-            //sTimePickerTime_0 = SomeDateTimeTimeSpanProxy_0.ToString("T");
-            //sOut_0 = tfnC_0.TimeStringFormatter(sTimePickerTime_0);
-            //int len_0 = sOut_0.Length;
-            ////int lenTimeCount = 10;
-            //int startIndex = 6;
-            //if (len_0 == 12 || len_0 == 18) //1:30:0000 AM <-- 12 Chars || 1:27:32:8756657 PM <-- 18 chars
-            //    {
-            //    startIndex = 5;
-            //    //lenTimeCount = 10;
-            //}               
-            //string sub_0 = sOut_0.Substring(startIndex, 2);           
-            //if (sub_0 != "00")
-            //{               
-            //    try
-            //    {
-            //        sOut_0 = sOut_0.Remove(startIndex, 10);// --> "1:30: PM"  or "10:30: PM" 
-            //    }
-            //    catch (ArgumentOutOfRangeException ex)
-            //    {
-            //        if (ex.HResult.ToString() == "0x80131502")
-            //        {
-            //            Debug.WriteLine("ex.HResult.ToString()\n0x80131502");
-            //        }
-            //        else
-            //        {
-            //            Debug.WriteLine("ex.StackTrace.ToString()\n");
-            //            Debug.WriteLine(ex.StackTrace.ToString());
-            //        }
-            //    }
-            //    finally
-            //    {                
-            //        //Debug.WriteLine("Always will run code in the finally."); 
-            //    }                    
-            //    string endChars_0;
-            //    len_0 = sOut_0.Length - 2;
-            //    endChars_0 = sOut_0.Substring(len_0, 2);// --> "PM"
-            //    len_0 = sOut_0.Length - 3;
-            //    string holding_0 = sOut_0.Remove(len_0, 3);// --> "1:30:" or "10:30:"
-            //    sOut_0 = holding_0 + "00 " + endChars_0;// --> "1:30:00 PM" or "10:30:00 PM"          
-            //}
-            //isMatch_0 = tfnC_0.TimesMatched(sOut_0, CurrentTime);
-
-            //sTimePickerTime_1 = SomeDateTimeTimeSpanProxy_1.ToString("T");
-            //sOut_1 = tfnC_1.TimeStringFormatter(sTimePickerTime_1);
-            //int len_1 = sOut_1.Length;
-            ////Handles when Time goes from single(1:30:10){5} to double digits(10:30:10){6}}          
-            //int startIndex_1 = 6;
-            //if (len_1 == 12 || len_1 == 18) //1:30:0000 AM <-- 12 Chars || 1:27:32:8756657 PM <-- 18 chars
-            //{
-            //    startIndex_1 = 5;
-            //}
-            ////Grabs the Seconds to set to "00" in any case
-            //string sub_1 = sOut_1.Substring(startIndex_1, 2);
-            //if (sub_1 != "00")
-            //{            
-            //    sOut_1 = sOut_1.Remove(startIndex_1, 10);           
-            //    string endChars_1;
-            //    len_1 = sOut_1.Length - 2;
-            //    endChars_1 = sOut_1.Substring(len_1, 2);
-            //    len_1 = sOut_1.Length - 3;
-            //    string holding_1 = sOut_1.Remove(len_1, 3);
-            //    sOut_1 = holding_1 + "00 " + endChars_1;
-            //}
-            //isMatch_1 = tfnC_1.TimesMatched(sOut_1, CurrentTime);
-
-            //sTimePickerTime_2 = SomeDateTimeTimeSpanProxy_2.ToString("T");
-            //sOut_2 = tfnC_2.TimeStringFormatter(sTimePickerTime_2);
-            //int len_2 = sOut_2.Length;           
-            //int startIndex_2 = 6;
-            //if (len_2 == 12 || len_2 == 18)
-            //{
-            //    startIndex_2 = 5;
-            //}            
-            //string sub_2 = sOut_0.Substring(startIndex_2, 2);
-            //if (sub_2 != "00")
-            //{
-            //    sOut_2 = sOut_2.Remove(startIndex_2, 10); 
-            //    string endChars_2;
-            //    len_2 = sOut_2.Length - 2;
-            //    endChars_2 = sOut_2.Substring(len_2, 2);
-            //    len_2 = sOut_2.Length - 3;
-            //    string holding_2 = sOut_2.Remove(len_2, 3);
-            //    sOut_2 = holding_2 + "00 " + endChars_2;
-            //}
-            //isMatch_2 = tfnC_2.TimesMatched(sOut_2, CurrentTime);
-
-            //sTimePickerTime_3 = SomeDateTimeTimeSpanProxy_3.ToString("T");
-            //sOut_3 = tfnC_3.TimeStringFormatter(sTimePickerTime_3);
-            //int len_3 = sOut_3.Length;
-            //int startIndex_3 = 6;
-            //if (len_3 == 12 || len_3 == 18)
-            //{
-            //    startIndex_3 = 5;
-            //}
-            //string sub_3 = sOut_3.Substring(startIndex_3, 2);
-            //if (sub_3 != "00")
-            //{
-            //    sOut_3 = sOut_3.Remove(startIndex_3, 10);
-            //    string endChars_3;
-            //    len_3 = sOut_3.Length - 2;
-            //    endChars_3 = sOut_3.Substring(len_3, 2);
-            //    len_3 = sOut_3.Length - 3;
-            //    string holding_3 = sOut_3.Remove(len_3, 3);
-            //    sOut_3 = holding_3 + "00 " + endChars_3;
-            //}
-            //isMatch_3 = tfnC_3.TimesMatched(sOut_3, CurrentTime);
-
-            //sTimePickerTime_4 = SomeDateTimeTimeSpanProxy_4.ToString("T");          
-            //sOut_4 = tfnC_4.TimeStringFormatter(sTimePickerTime_4);
-            //int len_4 = sOut_4.Length;
-            //int startIndex_4 = 6;
-            //if (len_4 == 12 || len_4 == 18)
-            //{
-            //    startIndex_4 = 5;
-            //}
-            //string sub_4 = sOut_4.Substring(startIndex_4, 2);
-            //if (sub_4 != "00")
-            //{
-            //    sOut_4 = sOut_4.Remove(startIndex_4, 10);
-            //    string endChars_4;
-            //    len_4 = sOut_4.Length - 2;
-            //    endChars_4 = sOut_4.Substring(len_4, 2);
-            //    len_4 = sOut_4.Length - 3;
-            //    string holding_4 = sOut_4.Remove(len_4, 3);
-            //    sOut_4 = holding_4 + "00 " + endChars_4;
-            //}
-            //isMatch_4 = tfnC_4.TimesMatched(sOut_4, CurrentTime);
-
-            //sTimePickerTime_5 = SomeDateTimeTimeSpanProxy_5.ToString("T");
-            //sOut_5 = tfnC_5.TimeStringFormatter(sTimePickerTime_5);
-            //int len_5 = sOut_5.Length;
-            //int startIndex_5 = 6;
-            //if (len_5 == 12 || len_5 == 18)
-            //{
-            //    startIndex_5 = 5;
-            //}
-            //string sub_5 = sOut_5.Substring(startIndex_5, 2);
-            //if (sub_5 != "00")
-            //{
-            //    sOut_5 = sOut_5.Remove(startIndex_5, 10);
-            //    string endChars_5;
-            //    len_5 = sOut_5.Length - 2;
-            //    endChars_5 = sOut_5.Substring(len_5, 2);
-            //    len_5 = sOut_5.Length - 3;
-            //    string holding_5 = sOut_5.Remove(len_5, 3);
-            //    sOut_5 = holding_5 + "00 " + endChars_5;
-            //}
-            //isMatch_5 = tfnC_5.TimesMatched(sOut_5, CurrentTime);
             #endregion
+            #region Play when isMatch
             if (isMatch_0 == true)
             {
                 SpeakAsync00_MMM();
@@ -1007,7 +802,7 @@ namespace ViewModels
             RaisePropertyChanged("IsMatch_0");
 
             if (isMatch_1 == true)
-            {            
+            {
                 SpeakAsync10_DayPart1();
                 //SpeakAsyncContentSelector();
             }
@@ -1019,7 +814,6 @@ namespace ViewModels
                 //SpeakAsyncContentSelector();
             }
             RaisePropertyChanged("IsMatch_2");
-
 
             if (isMatch_3 == true)
             {
@@ -1033,7 +827,6 @@ namespace ViewModels
                 SpeakAsync55_PreCrunchTime();
                 //SpeakAsyncContentSelector();
             }
-
             RaisePropertyChanged("IsMatch_4");
 
             if (isMatch_5 == true)
@@ -1042,6 +835,7 @@ namespace ViewModels
                 //SpeakAsyncContentSelector();
             }
             RaisePropertyChanged("IsMatch_5");
+            #endregion
             #endregion
         }
 
@@ -1094,6 +888,7 @@ namespace ViewModels
             {
                 someDateTime_0 = value;
                 RaisePropertyChanged("SomeDateTime_0");// **Note- no need for multiple someDateTimes???
+                Debug.WriteLine("Setter - SomeDateTime_0", SomeDateTime_0);
             }
         }
         public TimeSpan SomeDateTimeTimeSpanProxy_0
@@ -1127,12 +922,12 @@ namespace ViewModels
         }
         public TimeSpan SomeDateTimeTimeSpanProxy_1
         {
-            get => someDateTime_1 - someDateTime_1.Date;           
+            get => someDateTime_1 - someDateTime_1.Date;
             set
-            {            
+            {
                 if (SomeDateTimeTimeSpanProxy_1 != value)
-                {                 
-                    SomeDateTime_1 = someDateTime_1.Date.Add(value);                  
+                {
+                    SomeDateTime_1 = someDateTime_1.Date.Add(value);
                     RaisePropertyChanged("SomeDateTimeTimeSpanProxy_1");
                 }
             }

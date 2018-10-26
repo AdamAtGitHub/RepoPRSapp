@@ -12,10 +12,11 @@
     <StackPanel x:Name="pnlUCAddCreateTTS" Width="360" Height="640"
                 Background="Gray">
         <!--Change BorderBrush of button withImage to Orange-->
+        <!--Click="BtnSynthesize_ClickAsync"-->
         <Button HorizontalAlignment="Center" Margin="0 5"
                 Height="Auto" Width="Auto" 
                 BorderBrush="DarkGray"
-                Click="BtnSynthesize_ClickAsync">
+                >
             <Image x:Name="imgMicrophone"              
                    Tapped="ImgMicrophone_TappedAsync"                 
                    Source="/Assets/Images/Mic-Icon-Bl-03.png"               

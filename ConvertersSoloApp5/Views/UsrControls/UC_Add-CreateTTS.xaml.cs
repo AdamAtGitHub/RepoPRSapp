@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using System;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.Media.SpeechSynthesis;
 using Windows.Media.Streaming;
@@ -15,14 +16,14 @@ namespace Views.UsrControls
         }
 
         private async void ImgMicrophone_TappedAsync(object sender, TappedRoutedEventArgs e)
-        {           
-            //MediaElement mediaElement = new MediaElement();
+        {
+            MediaElement mediaElement = new MediaElement();
 
-            //var synthesizer = new SpeechSynthesizer();
-            //var stream = await synthesizer.SynthesizeTextToStreamAsync(boxInputTextToSpeak.Text);
+            var synthesizer = new SpeechSynthesizer();
+            var stream = await synthesizer.SynthesizeTextToStreamAsync(boxInputTextToSpeak.Text);
 
-            //mediaElement.SetSource(stream, stream.ContentType);
-            //mediaElement.Play();
+            mediaElement.SetSource(stream, stream.ContentType);
+            mediaElement.Play();
         }
 
         private async void BtnSynthesize_ClickAsync(object sender, Windows.UI.Xaml.RoutedEventArgs e)

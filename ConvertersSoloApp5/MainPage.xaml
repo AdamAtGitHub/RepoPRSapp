@@ -30,6 +30,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="*"/>
+            <!--<ColumnDefinition Width="*"/>-->
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
@@ -91,14 +92,14 @@
                         Margin="15 40 0 0"
                         Visibility="Collapsed"/>
                 <TextBlock x:Name="tbFilePicked" 
-                        Text="File Name 0" 
+                        Text="File Name 01211" 
                         Foreground="Ivory" FontSize="28"
-                        Width="150" Height="40"
-                        Margin="100 40 0 0"/>
-                <AppBarButton x:Name="PickAFileButton" 
+                        Width="210" Height="40"
+                        Margin="50 40 0 0"/>
+                <AppBarButton x:Name="PickAFileButton00" 
                               Icon="Add" Foreground="Ivory"
                               Content="Ckoose a File to Play"
-                              Margin="60,45,5,0" Click="PickAFileButton_Click"/>
+                              Margin="25,45,5,0"/>
             </StackPanel>
             <!--Play Content 1-->
             <StackPanel Orientation="Horizontal">
@@ -113,8 +114,12 @@
                         Visibility="Collapsed"/>
                 <TextBlock Text="SED Outloud" 
                         Foreground="Ivory" FontSize="28"
-                        Width="Auto"  Height="40"
-                        Margin="100 40 0 0"/>
+                         Width="210" Height="40"
+                        Margin="50 40 0 0"/>
+                <AppBarButton x:Name="PickAFileButton10" 
+                              Icon="Add" Foreground="Ivory"
+                              Content="Ckoose a File to Play"
+                              Margin="25,45,5,0"/>
             </StackPanel>
             <!--Play Content 2-->
             <StackPanel Orientation="Horizontal">
@@ -129,8 +134,12 @@
                         Visibility="Collapsed"/>
                 <TextBlock Text="Run" 
                         Foreground="Ivory" FontSize="28"
-                        Width="150" Height="40"
-                        Margin="100 40 0 0"/>
+                        Width="210" Height="40"
+                        Margin="50 40 0 0"/>
+                <AppBarButton x:Name="PickAFileButton20" 
+                              Icon="Add" Foreground="Ivory"
+                              Content="Ckoose a File to Play"
+                              Margin="25,45,5,0"/>
             </StackPanel>
             <!--Play Content 3-->
             <StackPanel Orientation="Horizontal">
@@ -145,8 +154,12 @@
                         Visibility="Collapsed"/>
                 <TextBlock Text="Workout" 
                         Foreground="Ivory" FontSize="28"
-                        Width="150" Height="40"
-                        Margin="100 40 0 0"/>
+                        Width="210" Height="40"
+                        Margin="50 40 0 0"/>
+                <AppBarButton x:Name="PickAFileButton30" 
+                              Icon="Add" Foreground="Ivory"
+                              Content="Ckoose a File to Play"
+                              Margin="25,45,5,0"/>
             </StackPanel>
             <!--Play Content 4-->
             <StackPanel Orientation="Horizontal">
@@ -161,8 +174,12 @@
                         Visibility="Collapsed"/>
                 <TextBlock  Text="Plan - Program" 
                         Foreground="Ivory" FontSize="28"
-                        Width="Auto" Height="40"
-                        Margin="100 40 0 0"/>
+                        Width="210" Height="40"
+                        Margin="50 40 0 0"/>
+                <AppBarButton x:Name="PickAFileButton40" 
+                              Icon="Add" Foreground="Ivory"
+                              Content="Ckoose a File to Play"
+                              Margin="25,45,5,0"/>
             </StackPanel>
             <!--Play Content 5-->
             <StackPanel Orientation="Horizontal">
@@ -177,8 +194,12 @@
                         Visibility="Collapsed"/>
                 <TextBlock Text="Relax to Sleep" 
                         Foreground="Ivory" FontSize="28"
-                        Width="Auto" Height="40"
-                        Margin="100 40 0 0"/>
+                        Width="210" Height="40"
+                        Margin="50 40 0 0"/>
+                <AppBarButton x:Name="PickAFileButton50" 
+                              Icon="Add" Foreground="Ivory"
+                              Content="Ckoose a File to Play"
+                              Margin="25,45,5,0"/>
                 <!--<TextBlock  Text="Wind down" 
                         Foreground="Ivory" FontSize="28"
                         Width="150" Height="40"
@@ -192,12 +213,14 @@
 
         <!--UCs Element-->
         <StackPanel x:Name="pnlCenterRight" Grid.Column="1" Grid.Row="1"
-                    VerticalAlignment="Top" HorizontalAlignment="Left"
-                    Margin="0 0 0 0" >
+                    VerticalAlignment="Top" HorizontalAlignment="Right"
+                    Margin="0 0 5 0" >
             <uc:UC_ADDFile Visibility="Collapsed"/>
             <uc:UC_AddContentList Margin="0 15" HorizontalAlignment="Center" VerticalAlignment="Center"
                                   Visibility="Collapsed"/>
-            <uc:UC_Mood/>
+            <uc:UC_Mood Visibility="Collapsed"/>
+            <uc:UC_Add_CreateTTS Margin="0 15" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                  Visibility="Visible"/>
         </StackPanel>
 
         <StackPanel x:Name="pnlBottomLeft" Grid.Column="0" Grid.Row="2"
